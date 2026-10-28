@@ -11,29 +11,49 @@ package Logic;
 
 import java.util.*;
 
+import UI.*;
+
 public class Core {
-    Window window; //Window object to be used as primary interface
-    Scanner input = new Scanner(System.in); //Allows input to be taken over CLI
+    
+    Scanner input; //Allows input to be taken over CLI
+    InterfaceManager im; 
+    Loop loop;
     
     
     /**
      * Core object constructor 
      */
     public Core(){
-        window = new Window();
+        loop = new Loop(this);
+        input = new Scanner(System.in);
+        im = new InterfaceManager(this); 
     }
     /**
      * Performs initial functions and value setting
      */
     public void setup(){
-        
+        im.setup();
     }
 
     /**
      * Method to be called when all pre-start conditions are met and application is ready to execute 
      */
     public void start(){
-        window.showWindow();
+        loop.startGameThread();
         
+        
+    }
+
+
+    //================ interaction ====================
+
+    public void passKey(String key){
+            System.out.println(key);
+    }
+
+    public void passCommand(){}
+
+    public void updateTick(int tick){
+        im.updateTick(tick);
     }
 }

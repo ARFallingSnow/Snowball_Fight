@@ -5,7 +5,7 @@ Purpose: Window to pose as main user display and interface
 Details: 
 */
 
-package Logic;
+package UI;
 
 import java.awt.*;
 import javax.swing.JFrame;
@@ -26,7 +26,7 @@ public class Window extends JFrame {
     /**
      * Window constructor - instantiates window object instance 
      */
-    public Window() {
+    public Window(KeyHandler keys) {
         window = new JFrame();
         windowHeight = 800;
         windowWidth = 1400;
@@ -34,12 +34,15 @@ public class Window extends JFrame {
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);
         window.setFocusable(true);
         window.setResizable(false);
+        window.setLocationRelativeTo(null);
+        window.addKeyListener(keys);
 
         // Creating the JPanel to containerize content 
         main = new JPanel(); 
         main.setBounds(0,0,windowWidth, windowHeight);
         main.setVisible(true);
         main.setBackground(bk);
+
 
         // Create and provide initial values for the text area 
         text = new JTextArea(); 
@@ -54,11 +57,13 @@ public class Window extends JFrame {
         
         main.add(text); 
         window.add(main);
+        
     }
     /**
      * Sets window visibility true
      */
     public void showWindow(){
+        
         window.setVisible(true);
     }
     /**
@@ -72,7 +77,7 @@ public class Window extends JFrame {
      * Sets the given content as the text
      * @param content string given to be displayed on the windows text area 
      */
-    public void setText(String content){
+    public void updateText(String content){
         text.setText(content);
     }
 
